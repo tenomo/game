@@ -2,38 +2,40 @@
 using System.Collections;
 
 namespace GameLogic
-{
+{ 
+     
     public class TriggerEnterHandler : MonoBehaviour
     {
+        /// <summary>
+        /// Обрабатывает соприкосновение коллайдеров. 
+        /// </summary>
+        /// <param name="other"></param>
         public void OnTriggerEnter(Collider other)
         {
 
-
-            // Тут все прозрачно но на всякий рапишу.
+            // Тут все прозрачно но на всякий случай....
             // Вопервых метод почему то работает одновременно со всеми входящими объектами. Учитывая что мы в конце уничтожаем,
             // наш наблюдатель-обработчик, то явно код не повторяеться и рабтает одновременно для (двух) объектов. 
-            // Не знаю почему так. изначально пробовал other заносить в список. работает - самое главное.
+            // Не знаю почему так. изначально пробовал other заносить в список. Но остановился на варинте ниже,работает и славно,
+            // пусть и не понятно
 
-
-            // Далее создаем примитив 
+            // Создание примита (шар). Используеться дефолтная фабрика  GameObject
             GameObject newGameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere); //GameObject.Instantiate(C
             // Присваеваем ему позицию текущего объекта - наблюдателя.
             newGameObject.transform.position = this.transform.position;
-            // Обнуляем скейл - маштаб (размер)
+            // Обнуление скейл
             newGameObject.transform.localScale = Vector3.zero;
 
             // Здесь храним сумму двух вдодящих объектов.
             Vector3 SumOthersOBJScale = Vector3.zero;       
-
-            SumOthersOBJScale += other.transform.localScale*2;      
+            SumOthersOBJScale += other.transform.localScale*2;   //   += Работает криво, не разберался умножил на 2
 
             newGameObject.transform.localScale = SumOthersOBJScale;
              
-             // Уничтожаем входящие объекты.
-             other.GetComponent<ISphereBehaviour>().DestroySphere();  
-    
+             // Уничтожение входящих объектов.
+             other.GetComponent<ISphereBehaviour>().DestroySphere();      
 
-            // Уничтожаем текущий обьект - наблюдателя
+            // Уничтожение текущий обьект - наблюдатель.
             Destroy(this.gameObject);
          
 
