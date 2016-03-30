@@ -12,6 +12,9 @@ public class EventHandler : MonoBehaviour {
     public event ButtonClickHandler ClickRun;
     public event ButtonClickHandler ClickBuildGameObjects;
 
+     // Эти методы назначаються кнопке в редакторе и вызыаються при нажатии. 
+  
+    #region perform events 
     public void Alert_ButtonClick_Run()
     {
         if (this.ClickRun != null)
@@ -23,4 +26,5 @@ public class EventHandler : MonoBehaviour {
         if (this.ClickBuildGameObjects != null)
             this.ClickBuildGameObjects();
     }
+    #endregion
 }

@@ -60,9 +60,7 @@ namespace GameLogic
                 if (i == 0)
                     ISB.side = Side.ringht;
                 else ISB.side = Side.left;
-
                 ISB.speed = 1.3f ; 
-
                 startPos += new Vector2(10, 0); // следующий елемент будет на 10 точек правее 5,0
 
                 // подписка на событие.
@@ -77,4 +75,8 @@ namespace GameLogic
             this.BuildSpheres();
         }
     }
+
+
+    // GameBuilder: - I need refactoring!   ... and interfaces :(  
+    // :D
 }
